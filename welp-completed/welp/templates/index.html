@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Welp</title>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js'></script>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+</head>
+
+<body>
+    <div id="content">
+        <div class="center">
+            <h1>Welp<img src="{{ url_for('static',filename='welp.jpg') }}"/></h1>
+        </div>
+        <div id="progressbar">
+            <span id="progressbar_span"></span>
+        </div>
+        <div class="center">
+            <input id="reload" type="submit" value="Import Data" />
+            <input id="clear_ratings" type="submit" value="Clear Ratings" />
+            <div id="selection">
+                <select id="cuisine_selection"></select>
+            </div>
+            <div id="rfreq_wrapper"><canvas id="rfreq"></canvas></div>
+        </div>
+    
+        <div id="body_wrapper">
+            <div class="center">
+                <div style="overflow: auto;">
+                    <div style="display: inline-block;"><b>Current Selection:</b></div>&nbsp;
+                    <div id="current_cuisine" style="display: inline-block;"></div>&nbsp;
+                    <div class="link" id="clear" style="display: inline-block;">(clear)</div>
+                </div>
+            </div>
+    
+            <div class="wrapper">
+                <div id="map"></div>
+                <div id="ratings_wrapper"><canvas id="ratings"></canvas></div>
+            </div>
+            <ul class="restaurants"></ul>
+        </div>
+    </div>
+    
+    <script>
+        var currentLocation = [{{ current_location[0] }}, {{ current_location[1] }}];
+        var mapAccessToken = '{{ map_access_token }}';
+    </script>
+    <script src="{{ url_for('static',filename='js/index.js') }}"></script>
+</body>
+
+</html>

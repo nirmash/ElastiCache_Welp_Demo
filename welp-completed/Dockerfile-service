@@ -1,0 +1,26 @@
+FROM envoyproxy/envoy-alpine-dev:latest
+
+RUN apk update && apk add python3 bash curl redis
+RUN pip3 install -q Flask==0.11.1 requests==2.18.4 redis json2html pymysql datetime
+RUN mkdir /code
+RUN mkdir /code/welp
+RUN mkdir /code/welp/static
+RUN mkdir /code/welp/static/js
+RUN mkdir /code/welp/static/styles
+RUN mkdir /code/welp/templates
+
+ADD ./nevada-restaurants.osm /code/
+ADD ./run-server.sh /code
+ADD ./setup.py /code
+ADD /welp/__init__.py /code/welp
+ADD /welp/data_import.py /code/welp
+ADD /welp/map.py /code/welp/
+ADD /welp/ratings.py /code/welp
+ADD /welp/restaurants.py /code/welp
+ADD /welp/static/welp.jpg code/welp/static
+ADD /welp/static/js/index.js code/welp/static/js
+ADD /welp/static/styles/index.css code/welp/static/styles
+ADD /welp/templates/index.html code/welp/templates
+ADD ./run-server.sh /usr/local/bin/run-server.sh
+RUN chmod u+x /code/run-server.sh
+ENTRYPOINT /code/run-server.sh
