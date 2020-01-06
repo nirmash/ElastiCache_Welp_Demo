@@ -55,7 +55,7 @@ export PYTHONPATH=/code
 # Build
 Browse to the `docker-compose.yaml` file location and load the application Docker container:
 ```
-$ cd ElastiCache_DbCache_Demo/dbcache
+$  cd ElastiCache_DbCache_Demo/welp-completed
 $ ./init_service.sh
 ```
 After the build process is done, the Docker containers status will appear (see below):
